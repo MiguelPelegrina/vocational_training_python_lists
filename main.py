@@ -107,6 +107,7 @@ def modificar():
 
 
 while entrada != "6":
+    # Ordenamos la lista automáticamente en función del código de los artículos 
     lista.sort(key=obtener_codigo)
     entrada = input("Introduzca un numero de 1 a 6: " +
         "\n 1: Para dar un producto de alta" +
