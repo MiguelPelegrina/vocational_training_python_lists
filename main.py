@@ -3,14 +3,20 @@ lista = []
 entrada = ""
 
 
+# Funciones auxiliares
 # Función auxiliar que recorre la lista para comprobar si contiene el código introducido. Devuelve el diccionario si la
 # lista contiene el código o devuelve None si no lo contiene
 def contieneCodigo(codigo):
     #Recorremos la lista
-    for i in lista:
-        if (i.get("Código artículo") == codigo):
-            return lista.__getitem__(lista.index(i))
+    for diccionario in lista:
+        if (diccionario.get("Código artículo") == codigo):
+            return lista.__getitem__(lista.index(diccionario))
     return None
+
+
+# Función auxiliar para poder ordenar la lista
+def obtener_codigo(diccionario):
+    return diccionario["Código artículo"]
 
 
 # Función que permite al usuario dar de alta un artículo en la lista
@@ -37,11 +43,11 @@ def darDeBaja():
     # Le pedimos información al usuario
     codigo = input("Introduzca el código del producto que quiera dar de baja")
     # Comprobamos que el código introducido existe
-    existe = contieneCodigo(codigo)
+    articulo = contieneCodigo(codigo)
     # Si existe
-    if (existe != None):
+    if (articulo != None):
         # Eliminamos el diccionario
-        lista.remove(existe)
+        lista.remove(articulo)
         print("Se ha eliminado el producto con el codigo " + codigo + " de la lista")
     # Si el artículo no se encuentra en la lista
     else:
@@ -74,7 +80,7 @@ def buscar():
 def modificar():
     codigo = input("Introduzca el código del producto que quiera modificar")
     # Comprobamos que existe el producto
-    existe = contieneCodigo(codigo)
+    articulo = contieneCodigo(codigo)
     # Recorremos la lista
     modificacion = input("¿Qué característica del artículo desea modificar?"
         "\n 1: Para cambiar el nombre" +
@@ -84,23 +90,24 @@ def modificar():
     #Modificamos el nombre
     if modificacion == "1":
         valor = input("¿Cúal será el nuevo nombre?")
-        existe.update({"Nombre":valor})
+        articulo.update({"Nombre":valor})
     #Modificamos la descripción
     elif modificacion == "2":
         valor = input("¿Cúal será la nueva descripción?")
-        existe.update({"Descripción":valor})
+        articulo.update({"Descripción":valor})
     #Modificamos el valor
     elif modificacion == "3":
         valor = input("¿Cúal será el nuevo precio?")
-        existe.update({"Precio":valor})
+        articulo.update({"Precio":valor})
     else:
         print("Introduzca una respuesta válida")
     # Si no se encuentra ningún producto que coincida con el código indicado
-    if (existe == None):
+    if (articulo == None):
         print("El producto no se encuentra en la lista")
 
 
 while entrada != "6":
+    lista.sort(key=obtener_codigo)
     entrada = input("Introduzca un numero de 1 a 6: " +
         "\n 1: Para dar un producto de alta" +
         "\n 2: Para dar un producto de baja" +
