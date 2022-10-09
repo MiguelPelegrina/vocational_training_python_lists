@@ -1,6 +1,5 @@
 lista = []
 entrada = ""
-esValido = False
 
 
 def darDeBaja():
@@ -19,15 +18,19 @@ def darDeBaja():
 
 def buscar():
     datoArticulo = input("Introduzca cualquier dato por el cúal quiera buscar un artículo")
+    noExiste = False
     for i in lista:
         for clave, valor in i.items():
             if valor == datoArticulo:
                 for clave,valor in i.items():
+                    noExiste = True
                     print(clave,valor)
-
+    if (noExiste == False):
+        print("El producto no se encuentra en la lista")
 
 def modificar():
     codigo = input("Introduzca el código del producto que quiera modificar")
+    existe = True
     for i in lista:
         if (i.get("Código artículo") == codigo):
             modificacion = input("¿Qué característica del artículo desea modificar?"
@@ -45,7 +48,9 @@ def modificar():
                 valor = input("¿Cúal será el nuevo precio?")
                 i.update({"Precio":valor})
         else:
-            print("El producto no se encuentra en la lista")
+            existe = False
+    if (existe == False):
+        print("El producto no se encuentra en la lista")
 
 
 def contieneCodigo(codigo):
