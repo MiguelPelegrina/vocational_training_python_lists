@@ -9,7 +9,6 @@ esValido = False
 
 def contieneCodigo(codigo):
     contiene = False
-    #NO ESTÁ BIEN TODAVÍA, ME DEBE A
     for i in lista:
         for clave, valor in i.items():
             if valor == codigo:
