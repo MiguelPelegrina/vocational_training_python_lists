@@ -52,20 +52,20 @@ def darDeBaja():
 # Función que permite al usuario ver qué artículos disponen de las características introducidas
 def buscar():
     datoArticulo = input("Introduzca cualquier dato por el cúal quiera buscar un artículo")
-    #Damos por hecho que existe el producto
+    # Damos por hecho que existe el producto
     noExiste = False
-    #Recorremos la lista
+    # Recorremos la lista
     for i in lista:
-        #Recorremos todos los diccionarios de la lista
+        # Recorremos todos los diccionarios de la lista
         for clave, valor in i.items():
-            #Si algún valor del mapa corresponde al dato indicado por el usuario
+            # Si algún valor del mapa corresponde al dato indicado por el usuario
             if valor == datoArticulo:
                 for clave,valor in i.items():
-                    #Se ha encontrado algún dato
+                    # Se ha encontrado algún dato
                     noExiste = True
-                    #Se saca por pantalla todos los datos del diccionario que coincide con el dato introducido
+                    # Se saca por pantalla todos los datos del diccionario que coincide con el dato introducido
                     print(clave,valor)
-    #Si el dato indicado no se encuentra en toda la lista
+    # Si el dato indicado no se encuentra en toda la lista
     if (noExiste == False):
         print("El producto no se encuentra en la lista")
 
@@ -73,33 +73,30 @@ def buscar():
 # Función que modifica
 def modificar():
     codigo = input("Introduzca el código del producto que quiera modificar")
-    #Damos por hecho que existe el producto
-    existe = True
-    #Recorremos la lista
-    for i in lista:
-        #Si el diccionario corresponde al codigo introducido
-        if (i.get("Código artículo") == codigo):
-            modificacion = input("¿Qué característica del artículo desea modificar?"
-                  "\n 1: Para cambiar el nombre" +
-                  "\n 2: Para cambiar la descripcion" +
-                  "\n 3: Para cambiar el precio"
-                  )
-            #Modificamos el nombre
-            if modificacion == "1":
-                valor = input("¿Cúal será el nuevo nombre?")
-                i.update({"Nombre":valor})
-            #Modificamos la descripción
-            elif modificacion == "2":
-                valor = input("¿Cúal será la nueva descripción?")
-                i.update({"Descripción":valor})
-            #Modificamos el valor
-            elif modificacion == "3":
-                valor = input("¿Cúal será el nuevo precio?")
-                i.update({"Precio":valor})
-        else:
-            existe = False
-    #Si no se encuentra ningún producto que coincida con el código indicado
-    if (existe == False):
+    # Comprobamos que existe el producto
+    existe = contieneCodigo(codigo)
+    # Recorremos la lista
+    modificacion = input("¿Qué característica del artículo desea modificar?"
+        "\n 1: Para cambiar el nombre" +
+        "\n 2: Para cambiar la descripcion" +
+        "\n 3: Para cambiar el precio"
+        )
+    #Modificamos el nombre
+    if modificacion == "1":
+        valor = input("¿Cúal será el nuevo nombre?")
+        existe.update({"Nombre":valor})
+    #Modificamos la descripción
+    elif modificacion == "2":
+        valor = input("¿Cúal será la nueva descripción?")
+        existe.update({"Descripción":valor})
+    #Modificamos el valor
+    elif modificacion == "3":
+        valor = input("¿Cúal será el nuevo precio?")
+        existe.update({"Precio":valor})
+    else:
+        print("Introduzca una respuesta válida")
+    # Si no se encuentra ningún producto que coincida con el código indicado
+    if (existe == None):
         print("El producto no se encuentra en la lista")
 
 
