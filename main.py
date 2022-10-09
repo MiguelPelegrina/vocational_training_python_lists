@@ -3,23 +3,33 @@ entrada = ""
 esValido = False
 
 def darDeBaja():
-    cod_articulo = input("Introduzca el código del producto que quiera dar de baja")
+    codigo = input("Introduzca el código del producto que quiera dar de baja")
+    existe = True
     for i in lista:
-        if(i.get("Código artículo") == cod_articulo):
+        if(i.get("Código artículo") == codigo):
             lista.remove(i)
-            print("Se ha eliminado el producto con el codigo " + cod_articulo + " de la lista")
+            print("Se ha eliminado el producto con el codigo " + codigo + " de la lista")
+            return
+        else:
+            existe = False
+    if(existe == False):
+        print("No se ha podido eliminar el producto porque no se encuentra en la lista")
 
-#def buscar
+def buscar():
+    datoArticulo = input("Introduzca cualquier dato por el cúal quiera buscar un artículo")
+    for i in lista:
+        for clave, valor in i.items():
+            if valor == datoArticulo:
+                for clave,valor in i.items():
+                    print(clave,valor)
 
 #def modificar()
 
 def contieneCodigo(codigo):
-    contiene = False
     for i in lista:
-        for clave, valor in i.items():
-            if valor == codigo:
-                contiene = True
-    return contiene
+        if (i.get("Código artículo") == codigo):
+            return True
+    return False
 
 def darDeAlta():
     cod_articulo = input("Introduzca el código del producto que quiera dar de alta")
@@ -49,8 +59,8 @@ while entrada != "6":
         darDeBaja()
     elif entrada == "3":
         codigoArticulo = input("Introduzca el código del producto que quiera modificar")
-    elif entrada == 4:
-        codigoArticulo = input("Introduzca cualquier dato por el cúal quiera buscar un artículo")
+    elif entrada == "4":
+        buscar()
     elif entrada == "5":
         for i in lista:
             for clave, valor in i.items():
