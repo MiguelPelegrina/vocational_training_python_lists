@@ -1,28 +1,55 @@
+#Declaración e inicialización de variables
 lista = []
 entrada = ""
 
 
-def darDeBaja():
-    codigo = input("Introduzca el código del producto que quiera dar de baja")
-    #Damos por hecho que existe el producto indicado
-    existe = True
+# Función auxiliar que recorre la lista para comprobar si contiene el código introducido. Devuelve el diccionario si la
+# lista contiene el código o devuelve None si no lo contiene
+def contieneCodigo(codigo):
     #Recorremos la lista
     for i in lista:
-        #Si algún diccionario de la lista contiene el código indicado
-        if(i.get("Código artículo") == codigo):
-            #Eliminamos el diccionario
-            lista.remove(i)
-            print("Se ha eliminado el producto con el codigo " + codigo + " de la lista")
-            #Y nos salimos de la función sin tener que recorrer el resto de la lista
-            return
-        #Si el código del artículo no se ha encontrado en este diccionario
-        else:
-            existe = False
-    #Si al recorrer la lista entera no se ha encontrado el producto se informa al usuario
-    if(existe == False):
+        if (i.get("Código artículo") == codigo):
+            return lista.__getitem__(lista.index(i))
+    return None
+
+
+# Función que permite al usuario dar de alta un artículo en la lista
+def darDeAlta():
+    cod_articulo = input("Introduzca el código del producto que quiera dar de alta")
+    # Se le pedirá al usuario un código de artículo válido hasta que el dato introducido no esté ya dentro de la lista
+    while contieneCodigo(cod_articulo):
+        cod_articulo = input("Introduzca el código de un producto que NO esté ya dado de alta")
+    #Le solicitamos el resto de los datos al usuario
+    nombre = input("Introduzca el nombre del producto")
+    descripcion = input("Introduzca la descripcion del producto")
+    precio = input("Introduzca el precio del producto")
+    diccionario = {"Código artículo": cod_articulo,
+                   "Nombre": nombre,
+                   "Descripción": descripcion,
+                   "Precio": precio
+                   }
+    #Añadimos el diccionario a la lista
+    lista.append(diccionario)
+
+
+# Función que permite al usuario dar de baja a un producto con su respectivo código de artículo
+def darDeBaja():
+    # Le pedimos información al usuario
+    codigo = input("Introduzca el código del producto que quiera dar de baja")
+    # Comprobamos que el código introducido existe
+    existe = contieneCodigo(codigo)
+    # Si existe
+    if (existe != None):
+        # Eliminamos el diccionario
+        lista.remove(existe)
+        print("Se ha eliminado el producto con el codigo " + codigo + " de la lista")
+    # Si el artículo no se encuentra en la lista
+    else:
+        # Se informa al usuario
         print("El producto no se encuentra en la lista")
 
 
+# Función que permite al usuario ver qué artículos disponen de las características introducidas
 def buscar():
     datoArticulo = input("Introduzca cualquier dato por el cúal quiera buscar un artículo")
     #Damos por hecho que existe el producto
@@ -43,6 +70,7 @@ def buscar():
         print("El producto no se encuentra en la lista")
 
 
+# Función que modifica
 def modificar():
     codigo = input("Introduzca el código del producto que quiera modificar")
     #Damos por hecho que existe el producto
@@ -73,33 +101,6 @@ def modificar():
     #Si no se encuentra ningún producto que coincida con el código indicado
     if (existe == False):
         print("El producto no se encuentra en la lista")
-
-
-#Recorremos la lista para saber si la lista con tiene el código introducido
-def contieneCodigo(codigo):
-    #Recorremos la lista
-    for i in lista:
-        if (i.get("Código artículo") == codigo):
-            return True
-    return False
-
-
-def darDeAlta():
-    cod_articulo = input("Introduzca el código del producto que quiera dar de alta")
-    #Comprobamos que el código no exista ya
-    while contieneCodigo(cod_articulo):
-        cod_articulo = input("Introduzca el código de un producto que NO esté ya dado de alta")
-    #Le solicitamos el resto de los datos al usuario
-    nombre = input("Introduzca el nombre del producto")
-    descripcion = input("Introduzca la descripcion del producto")
-    precio = input("Introduzca el precio del producto")
-    diccionario = {"Código artículo": cod_articulo,
-                   "Nombre": nombre,
-                   "Descripción": descripcion,
-                   "Precio": precio
-                   }
-    #Añadimos el diccionario a la lista
-    lista.append(diccionario)
 
 
 while entrada != "6":
