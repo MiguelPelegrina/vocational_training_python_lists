@@ -2,10 +2,16 @@ lista = []
 entrada = ""
 esValido = False
 
-#def darDeBaja(codigo):
-    #for i in lista:
+def darDeBaja():
+    cod_articulo = input("Introduzca el código del producto que quiera dar de baja")
+    for i in lista:
+        if(i.get("Código artículo") == cod_articulo):
+            lista.remove(i)
+            print("Se ha eliminado el producto con el codigo " + cod_articulo + " de la lista")
 
 #def buscar
+
+#def modificar()
 
 def contieneCodigo(codigo):
     contiene = False
@@ -40,10 +46,11 @@ while entrada != "6":
     if entrada == "1":
         darDeAlta()
     elif entrada == "2":
-        codigoArticulo = input("Introduzca el código del producto que quiera dar de baja")
-        #darDeBaja(codigoArticulo)
+        darDeBaja()
     elif entrada == "3":
         codigoArticulo = input("Introduzca el código del producto que quiera modificar")
+    elif entrada == 4:
+        codigoArticulo = input("Introduzca cualquier dato por el cúal quiera buscar un artículo")
     elif entrada == "5":
         for i in lista:
             for clave, valor in i.items():
