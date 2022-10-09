@@ -8,16 +8,18 @@ esValido = False
 #def buscar
 
 def contieneCodigo(codigo):
+    contiene = False
     #NO ESTÁ BIEN TODAVÍA, ME DEBE A
     for i in lista:
         for clave, valor in i.items():
-            while valor == codigo:
-                codigo = input("Introduzca un código de artículo que NO esté ya en la lista")
-    return codigo
+            if valor == codigo:
+                contiene = True
+    return contiene
 
 def darDeAlta():
     cod_articulo = input("Introduzca el código del producto que quiera dar de alta")
-    cod_articulo = contieneCodigo(cod_articulo)
+    while contieneCodigo(cod_articulo):
+        cod_articulo = input("Introduzca el código de un producto que NO esté ya dado de alta")
     nombre = input("Introduzca el nombre del producto")
     descripcion = input("Introduzca la descripcion del producto")
     precio = input("Introduzca el precio del producto")
