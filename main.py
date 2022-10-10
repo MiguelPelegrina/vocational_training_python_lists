@@ -82,28 +82,29 @@ def modificar():
     codigo = input("Introduzca el código del producto que quiera modificar")
     # Comprobamos que existe el producto
     articulo = contieneCodigo(codigo)
-    # Recorremos la lista
-    modificacion = input("¿Qué característica del artículo desea modificar?"
-        "\n 1: Para cambiar el nombre" +
-        "\n 2: Para cambiar la descripcion" +
-        "\n 3: Para cambiar el precio"
-        )
-    #Modificamos el nombre
-    if modificacion == "1":
-        valor = input("¿Cúal será el nuevo nombre?")
-        articulo.update({"Nombre":valor})
-    #Modificamos la descripción
-    elif modificacion == "2":
-        valor = input("¿Cúal será la nueva descripción?")
-        articulo.update({"Descripción":valor})
-    #Modificamos el valor
-    elif modificacion == "3":
-        valor = input("¿Cúal será el nuevo precio?")
-        articulo.update({"Precio":valor})
+    if(articulo != None):
+        # Recorremos la lista
+        modificacion = input("¿Qué característica del artículo desea modificar?"
+            "\n 1: Para cambiar el nombre" +
+            "\n 2: Para cambiar la descripcion" +
+            "\n 3: Para cambiar el precio"
+            )
+        #Modificamos el nombre
+        if modificacion == "1":
+            valor = input("¿Cúal será el nuevo nombre?")
+            articulo.update({"Nombre":valor})
+        #Modificamos la descripción
+        elif modificacion == "2":
+            valor = input("¿Cúal será la nueva descripción?")
+            articulo.update({"Descripción":valor})
+        #Modificamos el valor
+        elif modificacion == "3":
+            valor = input("¿Cúal será el nuevo precio?")
+            articulo.update({"Precio":valor})
+        else:
+            print("Introduzca una respuesta válida")
+        # Si no se encuentra ningún producto que coincida con el código indicado
     else:
-        print("Introduzca una respuesta válida")
-    # Si no se encuentra ningún producto que coincida con el código indicado
-    if (articulo == None):
         print("El producto no se encuentra en la lista")
 
 
