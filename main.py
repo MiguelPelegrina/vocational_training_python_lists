@@ -76,7 +76,8 @@ def buscar():
         print("El producto no se encuentra en la lista")
 
 
-# Función que modifica
+# Función que permite al usuario modificar los datos del artículo en función 
+# del código del artículo
 def modificar():
     codigo = input("Introduzca el código del producto que quiera modificar")
     # Comprobamos que existe el producto
